@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Chocolate Day</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+
+body{
+  height:100vh;
+  background:url('assets/bg.jpg') center/cover no-repeat;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  color:#fff;
+}
+
+/* dark overlay */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background:rgba(40,20,20,.45);
+  z-index:0;
+}
+
+/* floating real images (subtle) */
+.float img{
+  position:absolute;
+  width:26px;
+  opacity:.6;
+  animation:floatUp linear infinite;
+}
+@keyframes floatUp{
+  from{transform:translateY(110vh) rotate(0deg)}
+  to{transform:translateY(-120vh) rotate(360deg)}
+}
+
+/* card */
+.card{
+  position:relative;
+  z-index:2;
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(10px);
+  border-radius:22px;
+  padding:26px;
+  width:320px;
+  text-align:center;
+  box-shadow:0 0 40px rgba(255,180,180,.25);
+}
+
+/* fixed circle chocolate */
+.circle{
+  width:120px;height:120px;
+  border-radius:50%;
+  margin:0 auto 14px;
+  overflow:hidden;
+  box-shadow:0 0 25px rgba(255,170,170,.6);
+}
+.circle img{
+  width:100%;height:100%;object-fit:cover;
+}
+
+h1{
+  font-size:20px;
+  margin-bottom:6px;
+}
+.name{
+  font-size:18px;
+  letter-spacing:3px;
+  margin-bottom:6px;
+}
+.tag{
+  font-size:15px;
+  opacity:.9;
+  margin-bottom:12px;
+}
+.question{
+  font-style:italic;
+  margin-bottom:16px;
+}
+
+.buttons{
+  display:flex;justify-content:center;gap:14px;
+}
+button{
+  border:none;border-radius:22px;
+  padding:10px 18px;
+  font-size:14px;cursor:pointer;
+}
+.yes{background:#c85a7a;color:#fff}
+.no{background:#222;color:#ccc}
+
+.note{
+  margin-top:10px;
+  font-size:13px;
+  color:#ffd1dc;
+  display:none;
+}
+</style>
+</head>
+
+<body>
+
+<!-- subtle floating real assets -->
+<div class="float">
+  <img src="assets/choco-float.png" style="left:10%;animation-duration:16s">
+  <img src="assets/heart-gold.png" style="left:35%;animation-duration:20s">
+  <img src="assets/choco-float.png" style="left:65%;animation-duration:18s">
+  <img src="assets/heart-gold.png" style="left:85%;animation-duration:22s">
+</div>
+
+<div class="card">
+  <div class="circle">
+    <img src="assets/chocolate.png" alt="chocolate">
+  </div>
+
+  <h1>Happy Chocolate Day</h1>
+  <div class="name">H E T S I</div>
+  <div class="tag">Pretty Girl ✨</div>
+
+  <div class="question">Will you be my best friend forever?</div>
+
+  <div class="buttons">
+    <button class="yes" onclick="yes()">YES</button>
+    <button class="no" onclick="nope()">NO</button>
+  </div>
+
+  <div class="note" id="note">Please take it… please take it 🍫</div>
+</div>
+
+<script>
+function nope(){
+  document.getElementById('note').style.display='block';
+}
+
+function yes(){
+  // celebration burst
+  for(let i=0;i<14;i++){
+    const el=document.createElement('img');
+    el.src = Math.random()>0.5 ? 'assets/choco-float.png':'assets/heart-gold.png';
+    el.style.position='fixed';
+    el.style.left='50%';
+    el.style.top='50%';
+    el.style.width='22px';
+    el.style.transform=`translate(-50%,-50%) translate(${Math.random()*300-150}px,${Math.random()*300-150}px)`;
+    el.style.transition='1s';
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),1000);
+  }
+  setTimeout(()=>window.location.href='screen2.html',900);
+}
+</script>
+
+</body>
+</html>
